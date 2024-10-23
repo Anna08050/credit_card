@@ -58,6 +58,13 @@ box-sizing:border-box;
     flex:1 1 150px;
 }
 
+.container form .flexbox #password i {
+    position: absolute;
+    color: #999;
+    transform: translate(-30px, 10px);
+    cursor: pointer;
+}
+
 #submit {
     width: 100%;
     background: #0a2953;

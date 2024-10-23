@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Credit card form</title>
-    <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 <body> 
     <div class="container">
@@ -47,7 +48,7 @@
             </div>
             <div class="inputBox">
                 <span>Card Holder</span>
-                <input id="card_holder" type="text" placeholder="IVAN IVANOV" />
+                <input id="card_holder" type="text" placeholder="IVAN IVANOV"/>
             </div>
             <div class="flexbox">
                 <div class="inputBox">
@@ -91,9 +92,10 @@
                         <option value="2040">2040</option>
                     </select>
                 </div>
-                <div class="inputBox">
+                <div class="inputBox" id="password">
                     <span>CVV</span>
                     <input id="cvv" type="password" maxlength="3" placeholder="***" />
+                    <i class="far fa-eye-slash" id="eye"></i>
                 </div>
             </div>
             <div class="error" id="error-message">Пожалуйста, введите корректный срок годности.</div>

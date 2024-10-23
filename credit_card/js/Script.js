@@ -1,9 +1,9 @@
 
-document.getElementById('card_number').oninput = () => {
+document.getElementById('card_number').onkeyup = () => {
     document.getElementById('card-number-box').innerText = document.getElementById('card_number').value;
 }
 
-document.getElementById('card_holder').oninput = () => {
+document.getElementById('card_holder').onkeyup = () => {
     document.getElementById('card-holder-box').innerText = document.getElementById('card_holder').value;
 }
 
@@ -25,13 +25,53 @@ document.getElementById('cvv').onmouseleave = () => {
     document.getElementById('back').style.transform = 'perspective(1000px) rotateY(180deg)'
 }
 
+document.getElementById('cvv').onfocus = () => {
+    document.getElementById('front').style.transform = 'perspective(1000px) rotateY(-180deg)'
+    document.getElementById('back').style.transform = 'perspective(1000px) rotateY(0deg)'
+}
+
+document.getElementById('cvv').onblur = () => {
+    document.getElementById('front').style.transform = 'perspective(1000px) rotateY(0deg)'
+    document.getElementById('back').style.transform = 'perspective(1000px) rotateY(180deg)'
+}
+
+document.getElementById('eye').onmouseenter = () => {
+    document.getElementById('front').style.transform = 'perspective(1000px) rotateY(-180deg)'
+    document.getElementById('back').style.transform = 'perspective(1000px) rotateY(0deg)'
+}
+document.getElementById('eye').onclick = () => {
+    document.getElementById('front').style.transform = 'perspective(1000px) rotateY(-180deg)'
+    document.getElementById('back').style.transform = 'perspective(1000px) rotateY(0deg)'
+}
+
 /* document.getElementById('cvv').oninput = () => {
     document.getElementById('cvv-box').innerText = document.getElementById('cvv').value;
 } */
 
-document.getElementById('cvv').oninput = () => {
+/* document.getElementById('cvv').oninput = () => {
     const cvvValue = document.getElementById('cvv').value;
     document.getElementById('cvv-box').innerText = '*'.repeat(cvvValue.length);
+} */
+
+let isMasked = true; 
+
+document.getElementById('cvv').oninput = () => {
+    const cvvValue = document.getElementById('cvv').value;
+    if (isMasked) {
+        document.getElementById('cvv-box').innerText = '*'.repeat(cvvValue.length);
+    } else {
+        document.getElementById('cvv-box').innerText = cvvValue;
+    }
+}
+
+document.getElementById('eye').onclick = () => {
+    isMasked = !isMasked; 
+    const cvvValue = document.getElementById('cvv').value;
+    if (isMasked) {
+        document.getElementById('cvv-box').innerText = '*'.repeat(cvvValue.length); 
+    } else {
+        document.getElementById('cvv-box').innerText = cvvValue;
+    }
 }
 
 
@@ -52,6 +92,26 @@ document.getElementById('card_number').addEventListener('input', function (e) {
 
 document.getElementById('card_holder').addEventListener('input', function (e) {
     e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, '').toUpperCase();
+
+    let words = e.target.value.trim().split(' ');
+
+    if (words.length > 2) {
+        e.target.value = words.slice(0, 2).join(' ');
+    }
+});
+
+
+const cvvShow = document.getElementById('eye'),
+    Cvv = document.getElementById('cvv');
+
+cvvShow.addEventListener("click", () => {
+    if (Cvv.type === "password") {
+        Cvv.type = "text";
+        cvvShow.classList.replace("fa-eye-slash", "fa-eye");
+    } else {
+        Cvv.type = "password";
+        cvvShow.classList.replace("fa-eye", "fa-eye-slash");
+    }
 });
 
 document.getElementById('submit').onclick = function () {
